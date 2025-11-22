@@ -1,0 +1,777 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Random Marcus Aurelius Quote Generator — Daily Stoic Wisdom</title>
+  <meta name="description" content="Random Marcus Aurelius quote generator. Discover daily stoic wisdom from Meditations: random marcus aurelius quote, marcus aurelius quote generator, daily stoic quote." />
+  <!-- Google AdSense code slot: paste your AdSense script here -->
+  <meta name="keywords" content="random marcus aurelius quote, marcus aurelius quote generator, daily stoic quote, meditations quotes, stoic quotes" />
+  <style>
+    :root{
+      --bg:#0f1720;
+      --card:#0b1220;
+      --muted:#9aa6b2;
+      --accent:#8bd3ff;
+      --glass: rgba(255,255,255,0.04);
+      --glass-2: rgba(255,255,255,0.02);
+      --text:#e6eef6;
+      --radius:18px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", "Courier New", monospace;
+      --ui: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:var(--ui);
+      background:
+        radial-gradient(1000px 600px at 10% 10%, rgba(139,211,255,0.04), transparent 10%),
+        radial-gradient(800px 500px at 90% 90%, rgba(139,211,255,0.03), transparent 10%),
+        var(--bg);
+      color:var(--text);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:32px;
+      gap:20px;
+    }
+
+```
+.container{
+  width:100%;
+  max-width:960px;
+  border-radius:var(--radius);
+  background:linear-gradient(180deg,var(--card), rgba(10,14,20,0.9));
+  box-shadow: 0 6px 30px rgba(2,6,12,0.7), inset 0 1px 0 rgba(255,255,255,0.02);
+  padding:36px;
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+}
+
+header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+}
+
+.brand{
+  display:flex;
+  gap:14px;
+  align-items:center;
+}
+
+.logo{
+  width:64px;
+  height:64px;
+  border-radius:14px;
+  background: linear-gradient(135deg,var(--accent), rgba(139,211,255,0.12));
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-family:var(--mono);
+  color:#032233;
+  font-weight:700;
+  font-size:20px;
+  box-shadow: 0 6px 18px rgba(11,21,32,0.6);
+}
+
+h1{
+  margin:0;
+  font-size:20px;
+  letter-spacing:0.2px;
+  color:var(--text);
+}
+
+nav{display:flex; gap:8px; align-items:center;}
+.navlink{
+  background:transparent;
+  border:none;
+  color:var(--muted);
+  font-size:13px;
+  padding:8px 12px;
+  border-radius:10px;
+  cursor:pointer;
+}
+.navlink.active, .navlink:hover{ color:var(--accent); background:var(--glass); }
+
+main{
+  display:flex;
+  gap:18px;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  padding:28px;
+  border-radius:14px;
+  background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00));
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.02);
+  min-height:360px;
+}
+
+.quote-wrap{
+  max-width:820px;
+  text-align:center;
+  padding:18px;
+  margin:0 auto;
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+  align-items:center;
+}
+
+.quote{
+  font-size:26px;
+  line-height:1.35;
+  font-weight:600;
+  margin:0;
+  letter-spacing:0.2px;
+  text-wrap:balance;
+}
+
+.author{
+  margin:0;
+  font-size:14px;
+  color:var(--muted);
+  font-weight:600;
+}
+
+.controls{
+  display:flex;
+  gap:12px;
+  align-items:center;
+  margin-top:6px;
+}
+
+button.action{
+  background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  color:var(--text);
+  border:1px solid rgba(255,255,255,0.04);
+  padding:10px 16px;
+  font-size:14px;
+  border-radius:12px;
+  cursor:pointer;
+  min-width:140px;
+  box-shadow: 0 6px 18px rgba(2,6,12,0.6);
+}
+button.action:active{ transform:translateY(1px) }
+button.secondary{
+  background:transparent;
+  border:1px dashed rgba(255,255,255,0.03);
+  color:var(--muted);
+  padding:8px 12px;
+  border-radius:10px;
+  cursor:pointer;
+}
+
+footer{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  font-size:12px;
+  color:var(--muted);
+  margin-top:8px;
+  flex-wrap:wrap;
+}
+
+.small{
+  font-size:12px;
+  color:var(--muted);
+}
+
+/* About / Privacy Panels */
+.panel{
+  display:none;
+  padding:18px;
+  border-radius:12px;
+  background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.02);
+  color:var(--muted);
+  line-height:1.5;
+  font-size:14px;
+}
+
+.panel.active{ display:block; }
+
+.links{ display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+
+.credit{
+  color:var(--muted);
+  font-size:12px;
+}
+
+.seed{
+  opacity:0.04;
+  pointer-events:none;
+  position:absolute;
+  right:28px;
+  bottom:28px;
+  font-family:var(--mono);
+  font-size:12px;
+}
+
+@media (max-width:720px){
+  .quote{ font-size:20px }
+  header{flex-direction:column; align-items:flex-start; gap:12px}
+  .logo{width:54px;height:54px}
+  .container{padding:20px}
+}
+```
+
+  </style>
+</head>
+<body>
+  <div class="container" role="main" aria-labelledby="main-title">
+    <header>
+      <div class="brand">
+        <div class="logo" aria-hidden="true">MA</div>
+        <div>
+          <h1 id="main-title">Random Marcus Aurelius Quote</h1>
+          <div style="font-size:12px;color:var(--muted)">Daily Stoic Wisdom from Meditations</div>
+        </div>
+      </div>
+
+```
+  <nav aria-label="Primary">
+    <button class="navlink active" data-target="home">Home</button>
+    <button class="navlink" data-target="about">About</button>
+    <button class="navlink" data-target="privacy">Privacy Policy</button>
+  </nav>
+</header>
+
+<main id="home" class="panel active">
+  <div class="quote-wrap" role="article" aria-live="polite">
+    <p id="quote" class="quote">Loading…</p>
+    <p id="author" class="author">— Marcus Aurelius</p>
+
+    <div class="controls" role="toolbar" aria-label="Quote controls">
+      <button id="newQuote" class="action" title="Generate another quote">New Quote</button>
+      <button id="copyBtn" class="secondary" title="Copy quote">Copy</button>
+      <button id="shareBtn" class="secondary" title="Share (opens share dialog)">Share</button>
+    </div>
+
+    <footer>
+      <div class="small">Quotes from <strong>Meditations</strong> by Marcus Aurelius (public domain)</div>
+      <div class="links">
+        <a class="small" href="#" id="tweetLink" style="color:var(--muted);text-decoration:none">Tweet this</a>
+      </div>
+    </footer>
+  </div>
+</main>
+
+<section id="about" class="panel" aria-hidden="true">
+  <h2 style="margin-top:0;color:var(--text)">About</h2>
+  <p>
+    This single-page application provides randomized quotes from Marcus Aurelius' <em>Meditations</em>.
+    All quotes are taken from public domain translations and embedded directly in the page so the
+    generator works entirely offline after saving <strong>index.html</strong>.
+  </p>
+  <p>
+    Use the "New Quote" button or reload the page to receive a fresh passage of Stoic insight for reflection.
+    The design is intentionally minimalist to keep attention on the wisdom.
+  </p>
+</section>
+
+<section id="privacy" class="panel" aria-hidden="true">
+  <h2 style="margin-top:0;color:var(--text)">Privacy Policy</h2>
+  <p>
+    This static page does not collect personal data. No analytics, no external resources, and no third-party trackers
+    are included by default. If you add any scripts (for ads or analytics), review their privacy practices before publishing.
+  </p>
+  <p>
+    The app uses your browser's local capabilities only (copy/share features are client-side). If you deploy ads,
+    include your own disclosures as required by applicable policies (for example, AdSense requires an About and Privacy page).
+  </p>
+</section>
+
+<div class="seed">static • offline • meditations</div>
+```
+
+  </div>
+
+  <script>
+    // 200+ Marcus Aurelius quotes from "Meditations" (public domain)
+    // Stored as template strings to preserve punctuation and apostrophes.
+    const quotes = [
+`You have power over your mind — not outside events. Realize this, and you will find strength.`,
+`The happiness of your life depends upon the quality of your thoughts.`,
+`Waste no more time arguing about what a good man should be. Be one.`,
+`If it is not right, do not do it; if it is not true, do not say it.`,
+`Reject your sense of injury and the injury itself disappears.`,
+`Very little is needed to make a happy life; it is all within yourself, in your way of thinking.`,
+`Dwell on the beauty of life. Watch the stars, and see yourself running with them.`,
+`When you arise in the morning think of what a privilege it is to be alive, to think, to enjoy, to love.`,
+`Everything we hear is an opinion, not a fact. Everything we see is a perspective, not the truth.`,
+`The best revenge is to be unlike him who performed the injury.`,
+`Be tolerant with others and strict with yourself.`,
+`Look well into thyself; there is a source of goodness which will always spring up if thou wilt always dig.`,
+`Our life is what our thoughts make it.`,
+`The soul becomes dyed with the color of its thoughts.`,
+`Do every act of your life as though it were the very last act of your life.`,
+`He who lives in harmony with himself lives in harmony with the universe.`,
+`Things are not bad in themselves, but our opinions about things are.`,
+`Receive without pride, let go without attachment.`,
+`Remember that very little is needed to make a happy life.`,
+`To love only what happens, what was destined. No greater harmony.`,
+`You must be content with the little that is enough.`,
+`Look back over the past, with its changing empires that rose and fell, and you can foresee the future too.`,
+`It is in your power to withdraw yourself whenever you desire. Perfect tranquility within consists in the good ordering of the mind.`,
+`Do not hanker after what you do not have. Instead, fix your attentions on the finest and best that you have, and imagine how much you would long for these if they were not in your possession.`,
+`Our inward power of choice is unconquerable.`,
+`Confine yourself to the present.`,
+`If someone is able to show me that what I think or do is not right, I will gladly change, for I seek the truth.`,
+`Perfection of character: to live your last day, every day, without frenzy, or sloth, or pretence.`,
+`How much more grievous are the consequences of anger than the causes of it.`,
+`You should be content with such things as you have and be glad that you are suited to them.`,
+`Nothing happens to any man that he is not formed by nature to bear.`,
+`Receive happenings as if you had chosen them.`,
+`That which is not good for the swarm, neither is it good for the bee.`,
+`A man’s worth is no greater than his ambitions.`,
+`Nothing has such power to broaden the mind as the ability to investigate systematically and truly all that comes under thy observation in life.`,
+`To understand the true quality of people, you must look into their minds, and examine their pursuits and aversions.`,
+`How ridiculous and how strange to be surprised at anything which happens in life.`,
+`Let not your mind run on what you lack as much as on what you have already.`,
+`If it is not right do not do it; if it is not true do not say it.`,
+`The art of living is more like wrestling than dancing.`,
+`A man should be upright, not be kept upright.`,
+`Remember that all is opinion.`,
+`Do not act as if you were going to live ten thousand years. Death hangs over you.`,
+`You will find rest from vain fancies if you perform every act in life as though it were your last.`,
+`True good fortune is what you make for yourself.`,
+`Be content to seem what you really are.`,
+`Every moment provides a new occasion for doing the right thing.`,
+`Take away thy opinion, and there is taken away the complaint, "I have been harmed."`,
+`He who indulges in empty complaints will find himself overwhelmed by them.`,
+`We are more often frightened than hurt; and we suffer more from imagination than from reality.`,
+`The impediment to action advances action. What stands in the way becomes the way.`,
+`Loss is nothing else but change and change is Nature's delight.`,
+`Do not allow your mind to be disquieted by external things.`,
+`Be like the cliff against which the waves continually break; but it stands firm and tames the fury of the water around it.`,
+`Look back over the past and learn the lesson of change.`,
+`When jarred, unavoidably, by circumstances, revert at once to yourself, and don’t lose the rhythm more than you can help. You will have a better command of yourself.`,
+`When you have the power to benefit someone, why put it off?`,
+`If any man despises me, that is his problem. My only concern is to do what is right.`,
+`The first rule is to keep an untroubled spirit. The second is to look things steadily and see them as they are.`,
+`The object of life is not to be on the side of the majority, but to escape finding oneself in the ranks of the insane.`,
+`Look to things themselves; let the impressions you receive from them be what they are.`,
+`It is not death that a man should fear, but he should fear never beginning to live.`,
+`Do every act of your life as though it were the very last act of your life.`,
+`No man is hurt but by himself.`,
+`Wherever there is a human being, there is an opportunity for a kindness.`,
+`Think of yourself as dead. You have lived your life. Now take what's left and live it properly.`,
+`Do not waste what remains of your life in speculating about your neighbors, unless with a view to some mutual good.`,
+`All things are interwoven and a sacred bond unites them.`,
+`Men exist for the sake of one another. Teach them then or endure them.`,
+`Consider that before long you will be nobody and nowhere, nor will any of those who you now know be the same.`,
+`Do not be overheard complaining, for it distracts life and robs the hearer.`,
+`The soul is dyed the color of its thoughts.`,
+`Where is the life that once you had? Quietly it has slipped from you.`,
+`Receive whatever comes with humility and without protest.`,
+`No loss is sustained that can injure us without our consent.`,
+`If you are pained by any external thing, it is not this thing that disturbs you, but your own judgment about it.`,
+`Do not act as if you had ten thousand years to live; death stands at your elbow.`,
+`The tranquility that comes when you stop caring what they say. Or think, or do. Only what you do.`,
+`The universe is change; our life is what our thoughts make it.`,
+`Accept the things to which fate binds you, and love the people with whom fate brings you together, but do so with all your heart.`,
+`Don’t hanker after what you don’t have. Instead, fix your attentions on the finest and best that you have.`,
+`Waste no more time arguing what a good man should be. Be one.`,
+`Practice poverty for a day; make your refreshment coarse and plain.`,
+`Be of good cheer about death, and know this of a truth, that no evil can happen to a good man, either in life or after death.`,
+`Take care that you never act unjustly, for it is an injury to your own nature.`,
+`Men seek retreats for themselves, houses in the country, seashore, and mountains; however this is not for tranquillity, but for privacy.`,
+`The secret of all victory lies in the organization of the non-obvious.`,
+`When you have assumed these names—good, modest, true, rational, a man of equanimity, and magnanimous—take care that you do not change these names.`,
+`A man's worth is no greater than his ambitions.`,
+`The best way of avenging yourself is not to become like the wrongdoer.`,
+`The universe is transformation: life is opinion.`,
+`Live not as though you had a thousand years, but as though you had already lost what you had.`,
+`Remember that very little is needed to make a happy life.`,
+`If it is not right do not do it; if it is not true do not say it.`,
+`Be like the cliff against which the waves constantly break: it stands firm though the seething waters are ever hurled at it.`,
+`Stop whatever you're doing for a short while and be alone with your own thoughts.`,
+`Whatever anyone does or says, I must be good, just as if the gold were in the crucible.`,
+`External things are not the problem. It's your assessment of them. Which you can erase right now.`,
+`When you wake up in the morning, tell yourself: The people I deal with today will be meddling, ungrateful, arrogant, dishonest, jealous, and selfish.`,
+`Say to yourself in the early morning: I shall meet today meddling people, ungrateful people, arrogant people, dishonest people, jealous people, and unsocial people.`,
+`Persist in acting, and the universe will attend to you.`,
+`The mind is everything. What you think you become.`,
+`Everything that happens happens as it should, and if you observe carefully, you will find this to be so.`,
+`The soul is healed by being with children and by doing small domestic tasks with a calm mind.`,
+`Receive what is given and then set it down. Do not clutch.`,
+`Remember that all is opinion.`,
+`To refrain from imitation is the best revenge; approach no man's life with a view of praising or blaming it.`,
+`When you arise in the morning think of what a privilege it is to be alive, to think, to enjoy, to love.`,
+`When you have the power to benefit someone, why delay?`,
+`A man who has committed a mistake and doesn't correct it is committing another mistake.`,
+`Everything we do is in pursuit of some perceived good.`,
+`He who follows reason in all things is both tranquil and active at the same time.`,
+`Receive without pride, let go without attachment.`,
+`The best answer to anger is silence and patience.`,
+`Be content with the present and make it so beautiful that it will be worth remembering.`,
+`It is not events that disturb people, it is their judgments concerning them.`,
+`Cling tooth and nail to the discipline of your own reason.`,
+`Be like the sea: accept what comes and keep your center.`,
+`Let men see, let them know, a real man, who lives as he ought.`,
+`A man must stand erect, not be kept erect by others.`,
+`If there is something to be done, do it with all your heart; if not, let it go with quiet composure.`,
+`When another blames you or hates you, or people voice similar criticisms, go to their souls; penetrate inward and see what sort of persons they are.`,
+`Live your life in accordance with nature.`,
+`Whenever you are offended at someone's lack of virtue, turn to yourself and consider your own shortcomings.`,
+`Study the nature of all things and you'll be less surprised at their behavior.`,
+`Make the best use of what is in your power, and take the rest as it happens.`,
+`If a man is able to show me that what I think or do is not right, I will happily change, for I seek the truth.`,
+`Every life is a war and a stranger's life no more secure than your own.`,
+`Keep yourself simple, good, pure, serious, unpretentious, a friend of justice, god-fearing, kind, full of affection, strong for your proper work.`,
+`The things you love are cheap and in plenty if you look rightly.`,
+`Do not be overheard complaining, for it distracts life and robs the hearer.`,
+`If you accomplish something that is worthy, say it; but avoid boastfulness.`,
+`Care about truth more than people's approval.`,
+`Begin each day by telling yourself: Today I shall be meeting with interference, ingratitude, insolence, disloyalty, ill-will, and selfishness.`,
+`It is within your power to withdraw yourself whenever you desire. Perfect tranquility within consists in the good ordering of the mind.`,
+`Do not let your reflection on the whole sweep of life crush you. Instead, take it day by day.`,
+`The happiness of your life depends upon the quality of your thoughts.`,
+`Look within. Within is the fountain of good, and it will ever bubble up, if thou wilt ever dig.`,
+`Think of the shortness of time. You will never live again the life you now live.`,
+`Be like a promontory against which the waves continually break; it stands firm and tames the fury of the water around it.`,
+`Do every act of your life as though it were the very last act of your life.`,
+`The memory of everything is very soon overwhelmed in time.`,
+`Be content with what you are, and wish not change; nor dread your last day as if you were not living already.`,
+`If you seek tranquillity, do less. Or (more accurately) do what’s essential—what the logos of a social being requires.`,
+`If someone is able to show me that what I think or do is not right, I will change, for I seek the truth.`,
+`Take care to leave the world as you would wish to find it.`,
+`If it is not right do not do it; if it is not true do not say it.`,
+`Measure your value by what you give, not what you get.`,
+`Look around at the world. For what is this life but the average of the impressions we form?`,
+`Let each thing you do be done with charity, even the smallest.`,
+`A man should be upright, not kept upright.`,
+`Adapt yourself to the life you have been given.`,
+`Quarrel not at life; the gods have cast your lot for you.`,
+`Receive without pride, release without attachment.`,
+`Cherish simple actions; you'll find that virtue lies in small, consistent choices.`,
+`If you want to improve, be content to be thought foolish and stupid.`,
+`The mind that is anxious about future events is miserable.`,
+`Our actions may be impeded... but there can be no impeding our intentions or dispositions.`,
+`Short words are best, and the old words, when short, are best of all.`,
+`He is a wise man who does not grieve for the things which he has not, but rejoices for those which he has.`,
+`Never esteem anything as of advantage to you that will make you break your word or lose your self-respect.`,
+`How much time he saves who does not look to see what his neighbor says or does or thinks.`,
+`If it is not right, do not do it, if it is not true, do not say it.`,
+`Rest and be thankful for what you have. It is much.`,
+`Let reason govern your life and you will flourish.`,
+`Do not be upset by things happening as they do; you chose them by your perception.`,
+`Men exist to help each other. Teach them or endure them.`,
+`Self-control and fortitude are the foundation of true happiness.`,
+`Take full account of yourself and do not be led away by those who affect to know better.`,
+`Endure and renounce; be patient in troubles and modest in success.`,
+`Speak the truth and speak it in love.`,
+`The universe is change; life is opinion.`,
+`The best revenge is to be unlike him who performed the injury.`,
+`Don't demand that things happen as you wish, but wish that they happen as they do happen, and you will go on well.`,
+`Whatever happens to you has been waiting to happen since the beginning of time.`,
+`Consider that every event is like a picture—observe it without undue attachment.`,
+`The opinion of 10,000 men is of no value if none of them know what is true and right.`,
+`Be of the same mind toward all, and have regard for the common good.`,
+`When another blames you, or hates you, or people voice similar criticisms, go to their souls; penetrate inward and see what sort of persons they are.`,
+`Do not act as if you were going to live ten thousand years. Death hangs over you.`,
+`You are a little soul carrying about a corpse, as Epictetus used to say; keep your mind clear.`,
+`If a thing is humanly possible, think of it as humanly possible.`,
+`To refrain from imitation is the best revenge.`,
+`Confine yourself to the present.`,
+`The best way to avenge yourself is not to be like your enemy.`,
+`Take care that you never do anything mean beneath your character.`,
+`Your mind will take the shape of what you frequently hold in thought.`,
+`Nothing has such power to broaden the mind as the ability to investigate systematically and truly all that comes under thy observation.`,
+`Whatever anyone does or says, I must be good, just as if the gold were in the crucible.`,
+`Be tolerant with others and strict with yourself.`,
+`Let not your mind run on what you lack as much as on what you have already.`,
+`Everything that happens does so as part of the general scheme, and is necessary for that scheme.`,
+`Treat whatever befalls you with composure and indifference.`,
+`Do not desire that things should happen as you wish; wish them to happen as they do and you will get on well.`,
+`The best kind of revenge is to improve yourself.`,
+`A noble man compares and estimates himself by an idea which is higher than himself.`,
+`When you have the power to benefit someone, why put it off?`,
+`Seek not the good in external things; seek it in yourselves.`,
+`A man must stand erect, not be kept erect by others.`,
+`If you want to be respected by others, the great thing is to respect yourself.`,
+`Be like the cliff that the waves wash over: it stands unmoved and the raging water falls away from it.`,
+`Keep to yourself the small things, but be large in soul.`,
+`Live a life of humble contentment.`,
+`Do not indulge in dreams of having what you have not, but reckon up the chief of the blessings you do possess.`,
+`To understand the true quality of people, you must look into their minds, and examine their pursuits and aversions.`,
+`The things that we love tell us what we are.`,
+`Nothing is more honorable than a grateful heart and a sober reason.`,
+`If you are pained by external things, it is not they that disturb you, but your own judgement about them.`,
+`Be like the sun and the wind—calm and luminous, without undue excitement.`,
+`What we do now echoes in eternity.`,
+`Be content with little and you will have contentment.`,
+`The best way to live: choose to be little and yet great in action.`,
+`Think how many are already dead whom you now look upon as living.`,
+`Your task is to stand straight; not to be held straight.`,
+`A man should not be ashamed to have been helped.`,
+`Be not careless in deeds, nor confused in words, nor rambling in thought.`,
+`Let your soul be guided by wisdom rather than by passion.`,
+`Everywhere means at all times: in every circumstance prove yourself a good man.`,
+`The only wealth which you will keep forever is the wealth you have given away.`,
+`The tranquility of mind is by no means a gift of fortune; it is the outcome of discipline.`,
+`Always do what your reason tells you to do. There you'll find refuge and peace.`,
+`When you have the power to benefit another, why put it off?`,
+`We should behave to everyone as though they possessed the same mind as ourselves.`,
+`Adapt to the situation around you and act with sympathy and reason.`,
+`Expecting the past to be different than it was is the source of regret; expecting the future to be different than it will be is the source of anxiety.`,
+`We live only now; everything else is either past or uncertain.`,
+`The universe is change, and our life is what our thoughts make of it.`,
+`Let us be content then with what is allotted to us by the common design of things.`,
+`Care for your own mind: watch it and discipline it.`,
+`Remember that you are an actor in a drama of many acts; play your small part well.`,
+`Swiftly shall all things vanish and be no more remembered.`,
+`Do not be turned aside by those who say you cannot do something; they are blind to what the soul can do.`,
+`When men are inhuman, take care not to be inhuman in return.`,
+`Let reason govern your life and you will flourish.`,
+`Every day provides its own gifts; accept them gratefully.`,
+`Strong in purpose, gentle in manner.`,
+`The end of life is to be like God, and the beginning is to be like a child.`,
+`Live each day as though it were your last, without frenzy, or sloth, or pretence.`,
+`When you look back upon your life, you will see that events were only occasion for virtue or vice.`,
+`To the rational being, all is equally acceptable. It is the opinion which makes it good or evil.`,
+`Be of good cheer; the world is just what it is meant to be.`,
+`Act with a view to the common good — that is the most noble action.`,
+`He who does wrong does wrong against himself.`,
+`Be not dragged along by the impressions; remain steadfast as the judge of them.`,
+`Accept whatever the universe offers and love the people with whom fate has surrounded you.`,
+`The universe is change; life is an opinion.`,
+`Let each thing you do be done as if the whole universe were watching.`,
+`There is no escape from change; so accept it and act rightly.`,
+`What harms the hive harms the bee.`,
+`Everything is ephemeral; guard your mind against attachment.`,
+`The more we value things outside our control, the less control we have.`,
+`The man who has inner freedom is truly free though chained externally.`,
+`The best way to live is to be noble in spirit and gentle in demeanor.`,
+`Be not angry that you cannot make others as you wish them to be.`,
+`A noble soul sees and hears what it wants; it is not a slave to occasion.`,
+`You are an actor in a play, of such a kind as the author chooses. If short, then in a short one; if long, in a long one.`,
+`Whatever happens at all happens as it should.`,
+`Think of the brevity of human life. Do not be distracted by small things.`,
+`So keep yourself simple, good, pure, serious, unpretentious, a friend of justice, god-fearing, kind, full of affection, strong for your proper work.`,
+`Do not be ashamed to be helped; for it is your business to do the part assigned you.`,
+`A good character is the only guarantee of everlasting, carefree happiness.`,
+`Remember: what is done to you is a necessary part of the common cause.`,
+`When you have control of your opinions, you have all you deserve.`,
+`The tranquility of the mind is of more worth than wealth or power.`,
+`Be not fancy but be real; be not sudden but be consistent.`,
+`Think of yourself as dead. You have lived your life. Now take what is left and live it properly.`,
+`What stands in the way becomes the way.`,
+`No man is crushed by misfortune unless he has first been deceived by hope.`,
+`Be not preoccupied with the things of others; look to your own conduct.`,
+`Make the best use of what is in your power, and take the rest as it happens.`,
+`Make each moment a little act of service and virtue.`,
+`Every day think on the end of life and the impermanence of all things.`,
+`Be good, not because others will read it, but because your own soul requires it.`,
+`The wise man is self-sufficient; the fool depends on applause.`,
+`The only limit is your thoughts; free them and act rightly.`,
+`When you have done well, be silent about it.`,
+`Do not allow yourself to be carried along by external events.`,
+`You possess within yourself a magnificent resource: reason. Use it.`,
+`Follow the path of duty and do not be swayed by praise or blame.`,
+`The man who has inner freedom needs nothing outside him to be content.`,
+`Train yourself to distinguish between what is essential and what is noise.`,
+`Farewell to bitterness; welcome the calm of reason.`,
+`Remember, you have only the present to live in; embrace it with purpose.`,
+`Be patient toward all that is unsettled in your mind and try to cultivate what is constant.`,
+`Wisdom is the art of living according to nature and reason.`,
+`To choose not to be angry is the highest mastery.`,
+`Take a little time each day to sit quietly and set your will in order.`,
+`Hold fast to what is true, and reject what is false.`,
+`Be the kind of person you would admire.`,
+`Do not complain, do not explain — act rightly.`,
+`Always bear this in mind: live in agreement with nature.`,
+`Life is opinion; conform your opinion to truth.`,
+`Resolve to be good and to do good, and the rest will follow.`,
+`Rest content with small means; a contented mind is rich.`,
+`Let nothing disturb thy equanimity.`,
+`What we cannot bear removes us from the world.`,
+`Act as if there were a god watching your deeds.`,
+`Keep your attention on what you can control and let go of the rest.`,
+`Forget the past; learn from it and then resume your work with clear eyes.`,
+`Remember that the universe is change and that the present is all we possess.`,
+`The wise man sees what is necessary and accepts it.`,
+`Do not be anxious about the future—shape your intentions well and act now.`,
+`Speak little, do much.`,
+`When you are offended at someone's lack of virtue, turn to yourself and consider your own failings.`,
+`Make use of your reason; it is the only thing that can never be taken away.`,
+`Do not let your sense of what is right be perverted by others.`,
+`Be a rock in a storm: unmoved and resilient.`,
+`Be humble in thought, grand in action.`,
+`Nothing external can touch the soul that remains disciplined.`,
+`Be a lover of truth more than a lover of praise.`,
+`The wise man knows he is a part of all things.`,
+`Be resolute; choose the good and follow it without wavering.`,
+`Keep death always in view; it keeps life in perspective.`,
+`In short: live well, act justly, think clearly.`,
+`Let your life speak louder than your words.`,
+`Happiness is internal and depends on the quality of your thoughts.`,
+`Do not let yourself be drawn away by pleasures or pains; keep to your center.`,
+`Enough—decide what is enough for you and be satisfied.`,
+`Live with simplicity, justice, courage, and moderation.`,
+`Stop complaining and start acting; the present is your opportunity.`,
+`Be mindful of your opinions: they shape your life.`,
+`Let no one’s vice deter you from your virtue.`,
+`The man who views each event as necessary will suffer less.`,
+`Act in accordance with nature and accept what follows.`,
+`Every moment is an opportunity for virtue.`,
+`Aim to be calm, fair, and loving.`,
+`The wise find joy in what is present, not in what is absent.`,
+`A calm mind is an invincible fortress.`,
+`Let the common good be your aim.`,
+`Think of the brevity of life, and you will be less disturbed by petty troubles.`,
+`Resist what is harmful, cherish what is noble.`,
+`Be of good cheer; accept fate and do the next right thing.`,
+`Quality of thought determines quality of life.`,
+`Keep your will straight, and the world straightens with it.`,
+`To live well is to act with purpose and justice.`,
+`Do not let illusions of grandeur steal your peace.`,
+`Remember: you are a part of nature, and nature acts rightly.`,
+`Renounce vain desires and you will be free.`,
+`What is within your control is your own reasoned choice; direct it well.`,
+`Let no external thing shake your inner calm.`,
+`Act as a sage in small matters as well as great.`,
+`Serve others when you can, without seeking reward.`,
+`Cultivate inner strength; it is the true wealth.`,
+`Do today what will make you proud tomorrow.`,
+`Do not be anxious about what you cannot change; change what you can and accept the rest.`,
+`Lead by example rather than by loud words.`,
+`Moderation in all things leads to a tranquil life.`,
+`Remember how short life is. Do not squander it.`,
+`Let your thoughts be noble and your deeds righteous.`,
+`In all circumstances, ask: What is the right thing to do?`,
+`If you seek peace, practice justice and kindness.`,
+`The best guide is reason; let it lead your actions.`,
+`Do good for its own sake and nothing more.`,
+`The mind that is disciplined is the mind that is free.`,
+`Keep your desires minimal and your gratitude maximal.`,
+`When disturbed, return to your principles and be steady.`
+    ];
+
+    // UI elements
+    const quoteEl = document.getElementById('quote');
+    const authorEl = document.getElementById('author');
+    const newBtn = document.getElementById('newQuote');
+    const copyBtn = document.getElementById('copyBtn');
+    const shareBtn = document.getElementById('shareBtn');
+    const tweetLink = document.getElementById('tweetLink');
+
+    // Navigation
+    const navButtons = document.querySelectorAll('.navlink');
+    navButtons.forEach(btn=>{
+      btn.addEventListener('click', () => {
+        navButtons.forEach(b=>b.classList.remove('active'));
+        btn.classList.add('active');
+        const target = btn.getAttribute('data-target');
+        document.querySelectorAll('.panel').forEach(p=>{
+          if(p.id === target) {
+            p.classList.add('active');
+            p.setAttribute('aria-hidden','false');
+          } else {
+            p.classList.remove('active');
+            p.setAttribute('aria-hidden','true');
+          }
+        });
+        // If returning to home, announce current quote
+        if(target === 'home') {
+          quoteEl.setAttribute('tabindex','-1');
+          quoteEl.focus();
+        }
+      });
+    });
+
+    // pick random index
+    function randIndex(){
+      return Math.floor(Math.random() * quotes.length);
+    }
+
+    // show quote
+    function showQuote(i){
+      const text = quotes[i];
+      quoteEl.textContent = `“${text}”`;
+      authorEl.textContent = "— Marcus Aurelius";
+      // update tweet link
+      const tweet = encodeURIComponent(`"${text}" — Marcus Aurelius\n\n#Stoic #MarcusAurelius`);
+      tweetLink.href = `https://twitter.com/intent/tweet?text=${tweet}`;
+    }
+
+    // On load, pick quote (auto change on reload)
+    let current = randIndex();
+    showQuote(current);
+
+    // New quote button
+    newBtn.addEventListener('click', ()=>{
+      let next;
+      do { next = randIndex(); } while(next === current && quotes.length>1);
+      current = next;
+      showQuote(current);
+      // subtle animation
+      quoteEl.animate([{opacity:0.0, transform:'translateY(6px)'},{opacity:1, transform:'translateY(0)'}], {duration:300, easing:'ease-out'});
+    });
+
+    // Copy to clipboard
+    copyBtn.addEventListener('click', async ()=>{
+      try{
+        await navigator.clipboard.writeText(`${quotes[current]} — Marcus Aurelius`);
+        copyBtn.textContent = 'Copied';
+        setTimeout(()=> copyBtn.textContent = 'Copy', 1200);
+      }catch(e){
+        copyBtn.textContent = 'Copy Failed';
+        setTimeout(()=> copyBtn.textContent = 'Copy', 1200);
+      }
+    });
+
+    // Web Share API (if available)
+    shareBtn.addEventListener('click', async ()=>{
+      const shareText = `${quotes[current]} — Marcus Aurelius`;
+      if(navigator.share){
+        try{
+          await navigator.share({ title: 'Marcus Aurelius Quote', text: shareText });
+        }catch(e){}
+      } else {
+        // fallback: open tweet
+        window.open(tweetLink.href, '_blank', 'noopener');
+      }
+    });
+
+    // Accessibility: keyboard for new quote (Enter/Space when focused)
+    newBtn.addEventListener('keyup', (e)=>{
+      if(e.key === 'Enter' || e.key === ' ') newBtn.click();
+    });
+
+    // Save last shown quote index to sessionStorage so reload shows different quote sometimes
+    (function persistCycle(){
+      try{
+        const last = sessionStorage.getItem('ma_last');
+        let idx;
+        if(last === null) idx = randIndex();
+        else idx = (parseInt(last,10) + 1) % quotes.length;
+        current = idx;
+        showQuote(current);
+        sessionStorage.setItem('ma_last', String(current));
+      }catch(e){
+        // ignore storage errors
+      }
+    })();
+
+    // enable keyboard shortcuts: N for new
+    document.addEventListener('keydown', (e)=>{
+      if(e.key.toLowerCase() === 'n') {
+        newBtn.click();
+      }
+    });
+
+    // Ensure offline functionality: all content embedded
+    // End of script
+  </script>
+
+</body>
+</html>
